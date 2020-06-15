@@ -9,11 +9,14 @@ def scala_grpc_library(**kwargs):
         **{k: v for (k, v) in kwargs.items() if k in ("deps", "verbose")} # Forward args
     )
 
+    scala_deps = []
+    if "extra_deps" in kwargs:
+        extra_deps = kwargs.get("extra_deps")
     # Create scala library
     scala_library(
         name = kwargs.get("name"),
         srcs = [name_pb],
-        deps = GRPC_DEPS,
+        deps = GRPC_DEPS + extra_deps,
         exports = GRPC_DEPS,
         visibility = kwargs.get("visibility"),
     )
@@ -24,7 +27,10 @@ GRPC_DEPS = [
     "@scalapb_lenses//jar",
     "@com_google_protobuf//:protobuf_java",
     "@com_google_guava_guava//jar",
+    "@3rdparty//3rdparty/jvm/com/lightbend/akka/grpc:akka_grpc_runtime",
+    "@3rdparty//3rdparty/jvm/com/typesafe/akka:akka_actor",
+    "@3rdparty//3rdparty/jvm/com/typesafe/akka:akka_stream",
+    "@3rdparty//3rdparty/jvm/com/typesafe/akka:akka_http",
+    "@3rdparty//3rdparty/jvm/com/typesafe/akka:akka_http_core",
     "@io_grpc_grpc_java//core",
-    "@io_grpc_grpc_java//protobuf",
-    "@io_grpc_grpc_java//stub",
 ]

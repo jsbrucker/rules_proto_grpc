@@ -281,12 +281,12 @@ scala_proto_repositories()
 # Scala routeguide
 #
 load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
-jvm_maven_import_external(
-    name = "com_thesamet_scalapb_scalapb_json4s",
-    artifact = "com.thesamet.scalapb:scalapb-json4s_2.12:0.7.1",
-    artifact_sha256 = "6c8771714329464e03104b6851bfdc3e2e4967276e1a9bd2c87c3b5a6d9c53c7",
-    server_urls = ["https://repo.maven.apache.org/maven2"],
-)
+#jvm_maven_import_external(
+#    name = "com_thesamet_scalapb_scalapb_json4s",
+#    artifact = "com.thesamet.scalapb:scalapb-json4s_2.12:0.7.1",
+#    artifact_sha256 = "6c8771714329464e03104b6851bfdc3e2e4967276e1a9bd2c87c3b5a6d9c53c7",
+#    server_urls = ["https://repo.maven.apache.org/maven2"],
+#)
 
 jvm_maven_import_external(
     name = "org_json4s_json4s_jackson_2_12",
@@ -309,6 +309,21 @@ jvm_maven_import_external(
     server_urls = ["https://repo.maven.apache.org/maven2"],
 )
 
+jvm_maven_import_external(
+    name = "org_json4s_json4s_ast_2_12",
+    artifact = "org.json4s:json4s-ast_2.12:3.6.1",
+    artifact_sha256 = "39c7de601df28e32eb0c4e3d684ec65bbf2e59af83c6088cda12688d796f7746",
+    server_urls = ["https://repo.maven.apache.org/maven2"],
+)
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
+akka_grpc_version = "0.7.1"
+http_file(
+    name = "com_github_akka_akka_gprc",
+    urls = ["https://repo1.maven.org/maven2/com/lightbend/akka/grpc/akka-grpc-codegen_2.12/{}/akka-grpc-codegen_2.12-{}-assembly.jar".format (akka_grpc_version, akka_grpc_version)],
+    sha256 = "05d4c255141207e92069d07a5540b77cfe78ff4f4ce7fc79d5dd1c04c681c801",
+    executable = True,
+)
 
 #
 # Swift

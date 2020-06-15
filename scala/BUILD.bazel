@@ -1,18 +1,14 @@
 load("//:plugin.bzl", "proto_plugin")
 
 proto_plugin(
-    name = "scala_plugin",
+    name = "akka_plugin",
     out = "{name}.jar",
-    tool = "@com_github_scalapb_scalapb//:bin/protoc-gen-scala",
+    tool = "@com_github_akka_akka_gprc//file",
     visibility = ["//visibility:public"],
-)
-
-proto_plugin(
-    name = "grpc_scala_plugin",
-    out = "{name}.jar",
     options = [
-        "grpc",
+        "generate_client=true",
+        "generate_server=true",
+        "language=scala",
+        "flat_package",
     ],
-    tool = "@com_github_scalapb_scalapb//:bin/protoc-gen-scala",
-    visibility = ["//visibility:public"],
 )

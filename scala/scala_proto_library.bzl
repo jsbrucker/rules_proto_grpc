@@ -9,11 +9,14 @@ def scala_proto_library(**kwargs):
         **{k: v for (k, v) in kwargs.items() if k in ("deps", "verbose")} # Forward args
     )
 
+    extra_deps = []
+    if "extra_deps" in kwargs:
+        extra_deps = kwargs.get("extra_deps")
     # Create scala library
     scala_library(
         name = kwargs.get("name"),
         srcs = [name_pb],
-        deps = PROTO_DEPS,
+        deps = PROTO_DEPS + extra_deps,
         exports = PROTO_DEPS,
         visibility = kwargs.get("visibility"),
     )
